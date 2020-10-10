@@ -111,4 +111,10 @@ add_action('login_enqueue_scripts','personalizedCSS');
 function personalizedCSS(){
     wp_enqueue_style('university_main_styles',get_stylesheet_uri());
 }
+
+add_filter( 'the_content', 'disable_wpautop_cpt', 0 );
+function disable_wpautop_cpt( $content ) {
+'custom_post_slug' === get_post_type() && remove_filter( 'the_content', 'wpautop' );
+return $content;
+}
 ?>
